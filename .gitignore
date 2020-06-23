@@ -1,0 +1,11 @@
+# Binaries for programs and plugins
+bin/
+
+# Goland project files
+.idea/
+
+# Vscode project files
+.vscode/
+
+# Local .env file
+.env
