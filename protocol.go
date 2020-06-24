@@ -5,6 +5,22 @@ import "errors"
 // ErrUnsupportedPdu throws when pdu passed to Encode() is not a pointer to supported pdu structure
 var ErrUnsupportedPdu = errors.New("pdu unsupported or not a pointer")
 
+// SMPP v3.4 - 2.1 page 13
+const (
+	ConnectionModeTransmitter string = "TX"
+	ConnectionModeReceiver    string = "RX"
+	ConnectionModeTransceiver string = "TRX"
+)
+
+// SMPP v3.4 - 2.2 page 14
+const (
+	SessionOpenState    string = "OPEN"
+	SessionBondTxState  string = "BOUND_TX"
+	SessionBondRxState  string = "BOUND_RX"
+	SessionBondTrxState string = "BOUND_TRX"
+	SessionClosedState  string = "CLOSED"
+)
+
 // SMPP v3.4 - 3.2 page 38
 const PduHeaderLength int = 16
 
