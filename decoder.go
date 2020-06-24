@@ -1,18 +1,18 @@
 package smpp
 
 import (
-	"errors"
+	"bytes"
 	"io"
 	"strings"
 )
 
 // Decoder decodes smpp pdu
 type Decoder struct {
-	r io.Reader
+	r *bytes.Buffer
 }
 
 // NewDecoder constructs Decoder
-func NewDecoder(r io.Reader) *Decoder {
+func NewDecoder(r *bytes.Buffer) *Decoder {
 	return &Decoder{r: r}
 }
 
@@ -33,19 +33,15 @@ func (d *Decoder) readInt(v *int) error {
 // readString reads smpp octet string
 func (d *Decoder) readString(v *string, length int) error {
 	w := &strings.Builder{}
-	b := make([]byte, 1)
 	for i := 0; i < length; i++ {
-		n, err := d.r.Read(b)
-		if n < len(b) {
-			return io.EOF
-		}
+		b, err := d.r.ReadByte()
 		if err != nil {
 			return err
 		}
-		if b[0] == 0 {
+		if b == byte(0) {
 			break
 		}
-		w.WriteByte(b[0])
+		w.WriteByte(b)
 	}
 	*v = w.String()
 	return nil
@@ -65,32 +61,22 @@ func (d *Decoder) readHeader(header *Header) error {
 	return d.readInt(&header.SequenceNumber)
 }
 
-func (d *Decoder) readTlv(tlv *Tlv) error {
-	if err := d.readInt(&tlv.Tag); err != nil {
-		return err
-	}
-	if err := d.readInt(&tlv.Length); err != nil {
-		return err
-	}
-	if err := d.readString(&tlv.Value, tlv.Length); err != nil {
-		return err
-	}
-	return nil
-}
-
 // readTlvMap reads smpp tlv map
 func (d *Decoder) readTlvMap(tlvMap *TlvMap) error {
-	for {
+	for d.r.Len() > 0 {
 		tlv := new(Tlv)
-		err := d.readTlv(tlv)
-		if errors.Is(err, io.EOF) {
-			return nil
+		if err := d.readInt(&tlv.Tag); err != nil {
+			return err
 		}
-		if err != nil {
+		if err := d.readInt(&tlv.Length); err != nil {
+			return err
+		}
+		if err := d.readString(&tlv.Value, tlv.Length); err != nil {
 			return err
 		}
 		(*tlvMap)[TlvName(tlv.Tag)] = *tlv
 	}
+	return nil
 }
 
 // readBindBody reads smpp bind body

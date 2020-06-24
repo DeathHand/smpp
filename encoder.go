@@ -7,13 +7,13 @@ import (
 
 // Encoder encodes smpp pdu
 type Encoder struct {
-	w io.Writer
+	w *bytes.Buffer
 	h *bytes.Buffer
 	b *bytes.Buffer
 }
 
 // NewEncoder constructs Encoder
-func NewEncoder(w io.Writer) *Encoder {
+func NewEncoder(w *bytes.Buffer) *Encoder {
 	return &Encoder{
 		w: w,
 		h: &bytes.Buffer{},
