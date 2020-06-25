@@ -292,67 +292,100 @@ func (e *Encoder) writeGenericNack(pdu *GenericNackPdu) error {
 func (e *Encoder) Encode(pdu interface{}) error {
 	switch p := pdu.(type) {
 	case *BindReceiverPdu:
-		if err := e.writeBindReceiver(p); err != nil {
+		if err := e.writeBindBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *BindReceiverRespPdu:
-		if err := e.writeBindReceiverResp(p); err != nil {
+		if err := e.writeBindRespBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *BindTransmitterPdu:
-		if err := e.writeBindTransmitter(p); err != nil {
+		if err := e.writeBindBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *BindTransmitterRespPdu:
-		if err := e.writeBindTransmitterResp(p); err != nil {
+		if err := e.writeBindRespBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *BindTransceiverPdu:
-		if err := e.writeBindTransceiver(p); err != nil {
+		if err := e.writeBindBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *BindTransceiverRespPdu:
-		if err := e.writeBindTransceiverResp(p); err != nil {
+		if err := e.writeBindRespBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *UnbindPdu:
-		if err := e.writeUnbind(p); err != nil {
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *UnbindRespPdu:
-		if err := e.writeUnbindResp(p); err != nil {
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *OutBindPdu:
-		if err := e.writeOutBind(p); err != nil {
+		if err := e.writeOutBindBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *SubmitSmPdu:
-		if err := e.writeSubmitSm(p); err != nil {
+		if err := e.writeSmBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *SubmitSmRespPdu:
-		if err := e.writeSubmitSmResp(p); err != nil {
+		if err := e.writeSmRespBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *DeliverSmPdu:
-		if err := e.writeDeliverSm(p); err != nil {
+		if err := e.writeSmBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *DeliverSmRespPdu:
-		if err := e.writeDeliverSmResp(p); err != nil {
+		if err := e.writeSmRespBody(p.Body); err != nil {
+			return err
+		}
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *EnquireLinkPdu:
-		if err := e.writeEnquireLink(p); err != nil {
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *EnquireLinkRespPdu:
-		if err := e.writeEnquireLinkResp(p); err != nil {
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	case *GenericNackPdu:
-		if err := e.writeGenericNack(p); err != nil {
+		if err := e.writeHeader(p.Header); err != nil {
 			return err
 		}
 	default:

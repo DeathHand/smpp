@@ -179,126 +179,6 @@ func (d *Decoder) readSmRespBody(body *SmRespBody) error {
 	return d.readString(&body.MessageID, 65)
 }
 
-func (d *Decoder) readBindReceiver(header *Header) (*BindReceiverPdu, error) {
-	pdu := &BindReceiverPdu{Header: header}
-	if err := d.readBindBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readBindReceiverResp(header *Header) (*BindReceiverRespPdu, error) {
-	pdu := &BindReceiverRespPdu{Header: header}
-	if err := d.readBindRespBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	if err := d.readTlvMap(pdu.Tlv); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readBindTransmitter(header *Header) (*BindTransmitterPdu, error) {
-	pdu := &BindTransmitterPdu{Header: header}
-	if err := d.readBindBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readBindTransmitterResp(header *Header) (*BindTransmitterRespPdu, error) {
-	pdu := &BindTransmitterRespPdu{Header: header}
-	if err := d.readBindRespBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	if err := d.readTlvMap(pdu.Tlv); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readBindTransceiver(header *Header) (*BindTransceiverPdu, error) {
-	pdu := &BindTransceiverPdu{Header: header}
-	if err := d.readBindBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readBindTransceiverResp(header *Header) (*BindTransceiverRespPdu, error) {
-	pdu := &BindTransceiverRespPdu{Header: header}
-	if err := d.readBindRespBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	if err := d.readTlvMap(pdu.Tlv); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readUnbind(header *Header) (*UnbindPdu, error) {
-	return &UnbindPdu{Header: header}, nil
-}
-
-func (d *Decoder) readUnbindResp(header *Header) (*UnbindRespPdu, error) {
-	return &UnbindRespPdu{Header: header}, nil
-}
-
-func (d *Decoder) readOutBind(header *Header) (*OutBindPdu, error) {
-	pdu := &OutBindPdu{Header: header}
-	if err := d.readOutBindBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readSubmitSm(header *Header) (*SubmitSmPdu, error) {
-	pdu := &SubmitSmPdu{Header: header}
-	if err := d.readSmBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readSubmitSmResp(header *Header) (*SubmitSmRespPdu, error) {
-	pdu := &SubmitSmRespPdu{Header: header}
-	if err := d.readSmRespBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readDeliverSm(header *Header) (*DeliverSmPdu, error) {
-	pdu := &DeliverSmPdu{Header: header}
-	if err := d.readSmBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	if err := d.readTlvMap(pdu.Tlv); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readDeliverSmResp(header *Header) (*DeliverSmRespPdu, error) {
-	pdu := &DeliverSmRespPdu{Header: header}
-	if err := d.readSmRespBody(pdu.Body); err != nil {
-		return nil, err
-	}
-	return pdu, nil
-}
-
-func (d *Decoder) readEnquireLink(header *Header) (*EnquireLinkPdu, error) {
-	return &EnquireLinkPdu{Header: header}, nil
-}
-
-func (d *Decoder) readEnquireLinkResp(header *Header) (*EnquireLinkRespPdu, error) {
-	return &EnquireLinkRespPdu{Header: header}, nil
-}
-
-func (d *Decoder) readGenericNack(header *Header) (*GenericNackPdu, error) {
-	return &GenericNackPdu{Header: header}, nil
-}
-
 // Decode decodes smpp pdu
 func (d *Decoder) Decode() (interface{}, error) {
 	header := new(Header)
@@ -307,37 +187,106 @@ func (d *Decoder) Decode() (interface{}, error) {
 	}
 	switch header.CommandID {
 	case BindReceiver:
-		return d.readBindReceiver(header)
+		p := &BindReceiverPdu{Header: header}
+		if err := d.readBindBody(p.Body); err != nil {
+			return nil, err
+		}
+		return p, nil
 	case BindReceiverResp:
-		return d.readBindReceiverResp(header)
+		p := &BindReceiverRespPdu{Header: header}
+		if err := d.readBindRespBody(p.Body); err != nil {
+			return nil, err
+		}
+		if d.r.Len() > 0 {
+			if err := d.readTlvMap(p.Tlv); err != nil {
+				return nil, err
+			}
+		}
+		return p, nil
 	case BindTransmitter:
-		return d.readBindTransmitter(header)
+		p := &BindTransmitterPdu{Header: header}
+		if err := d.readBindBody(p.Body); err != nil {
+			return nil, err
+		}
+		return p, nil
 	case BindTransmitterResp:
-		return d.readBindTransmitterResp(header)
+		p := &BindTransceiverRespPdu{Header: header}
+		if err := d.readBindRespBody(p.Body); err != nil {
+			return nil, err
+		}
+		if d.r.Len() > 0 {
+			if err := d.readTlvMap(p.Tlv); err != nil {
+				return nil, err
+			}
+		}
+		return p, nil
 	case BindTransceiver:
-		return d.readBindTransceiver(header)
+		p := BindTransceiverPdu{Header: header}
+		if err := d.readBindBody(p.Body); err != nil {
+			return nil, err
+		}
+		return p, nil
 	case BindTransceiverResp:
-		return d.readBindTransceiverResp(header)
+		p := BindTransceiverRespPdu{Header: header}
+		if err := d.readBindRespBody(p.Body); err != nil {
+			return nil, err
+		}
+		if d.r.Len() > 0 {
+			if err := d.readTlvMap(p.Tlv); err != nil {
+				return nil, err
+			}
+		}
+		return p, nil
 	case Unbind:
-		return d.readUnbind(header)
+		return &UnbindPdu{Header: header}, nil
 	case UnbindResp:
-		return d.readUnbindResp(header)
+		return &UnbindRespPdu{Header: header}, nil
 	case OutBind:
-		return d.readOutBind(header)
+		p := &OutBindPdu{Header: header}
+		if err := d.readOutBindBody(p.Body); err != nil {
+			return nil, err
+		}
+		return p, nil
 	case SubmitSm:
-		return d.readSubmitSm(header)
+		p := &SubmitSmPdu{Header: header}
+		if err := d.readSmBody(p.Body); err != nil {
+			return nil, err
+		}
+		if d.r.Len() > 0 {
+			if err := d.readTlvMap(p.Tlv); err != nil {
+				return nil, err
+			}
+		}
+		return p, nil
 	case SubmitSmResp:
-		return d.readSubmitSmResp(header)
+		p := &SubmitSmRespPdu{Header: header}
+		if err := d.readSmRespBody(p.Body); err != nil {
+			return nil, err
+		}
+		return p, nil
 	case DeliverSm:
-		return d.readDeliverSm(header)
+		p := &DeliverSmPdu{Header: header}
+		if err := d.readSmBody(p.Body); err != nil {
+			return nil, err
+		}
+		if d.r.Len() > 0 {
+			if err := d.readTlvMap(p.Tlv); err != nil {
+				return nil, err
+			}
+		}
+		return p, nil
 	case DeliverSmResp:
-		return d.readDeliverSmResp(header)
+		p := &DeliverSmRespPdu{Header: header}
+		if err := d.readSmRespBody(p.Body); err != nil {
+			return nil, err
+		}
+		return p, nil
 	case EnquireLink:
-		return d.readEnquireLink(header)
+		return &EnquireLinkPdu{Header: header}, nil
 	case EnquireLinkResp:
-		return d.readEnquireLinkResp(header)
+		return &EnquireLinkRespPdu{Header: header}, nil
 	case GenericNack:
-		return d.readGenericNack(header)
+		return &GenericNackPdu{Header: header}, nil
 	}
 	return nil, ErrUnsupportedPdu
 }
