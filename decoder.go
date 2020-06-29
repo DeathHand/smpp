@@ -50,10 +50,10 @@ func (d *Decoder) readString(v *string, length int) error {
 // readHeader reads smpp pdu header
 func (d *Decoder) readHeader(header *Header) error {
 	if err := d.readInt(&header.CommandLength); err != nil {
-		return err
+		return ErrEsmeRinvCmdLen
 	}
 	if err := d.readInt(&header.CommandID); err != nil {
-		return err
+		return ErrEsmeRinvCmdId
 	}
 	if err := d.readInt(&header.CommandStatus); err != nil {
 		return err
@@ -66,13 +66,13 @@ func (d *Decoder) readTlvMap(tlvMap *TlvMap) error {
 	for d.r.Len() > 0 {
 		tlv := new(Tlv)
 		if err := d.readInt(&tlv.Tag); err != nil {
-			return err
+			return ErrEsmeRoptParNotAllwd
 		}
 		if err := d.readInt(&tlv.Length); err != nil {
-			return err
+			return ErrEsmeRinvParLen
 		}
 		if err := d.readString(&tlv.Value, tlv.Length); err != nil {
-			return err
+			return ErrEsmeRinvOptParamVal
 		}
 		(*tlvMap)[TlvName(tlv.Tag)] = *tlv
 	}
@@ -82,13 +82,13 @@ func (d *Decoder) readTlvMap(tlvMap *TlvMap) error {
 // readBindBody reads smpp bind body
 func (d *Decoder) readBindBody(body *BindBody) error {
 	if err := d.readString(&body.SystemID, 16); err != nil {
-		return err
+		return ErrEsmeRinvSysId
 	}
 	if err := d.readString(&body.Password, 9); err != nil {
-		return err
+		return ErrEsmeRinvPaswd
 	}
 	if err := d.readString(&body.SystemType, 13); err != nil {
-		return err
+		return ErrEsmeRinvSysTyp
 	}
 	if err := d.readInt(&body.InterfaceVersion); err != nil {
 		return err
@@ -110,66 +110,66 @@ func (d *Decoder) readBindRespBody(body *BindRespBody) error {
 // readOutBindBody reads smpp outbind body
 func (d *Decoder) readOutBindBody(body *OutBindBody) error {
 	if err := d.readString(&body.SystemID, 16); err != nil {
-		return err
+		return ErrEsmeRinvSysId
 	}
-	return d.readString(&body.Password, 9)
+	if err := d.readString(&body.Password, 9); err != nil {
+		return ErrEsmeRinvPaswd
+	}
+	return nil
 }
 
 // readSmBody reads smpp short message body
 func (d *Decoder) readSmBody(body *SmBody) error {
 	if err := d.readString(&body.ServiceType, 6); err != nil {
-		return err
+		return ErrEsmeRinvSerTyp
 	}
 	if err := d.readInt(&body.SourceAddrTon); err != nil {
-		return err
+		return ErrEsmeRinvSrcTon
 	}
 	if err := d.readInt(&body.SourceAddrNpi); err != nil {
-		return err
+		return ErrEsmeRinvSrcNpi
 	}
 	if err := d.readString(&body.SourceAddr, 21); err != nil {
-		return err
+		return ErrEsmeRinvSrcAdr
 	}
 	if err := d.readInt(&body.DestAddrTon); err != nil {
-		return err
+		return ErrEsmeRinvDstTon
 	}
 	if err := d.readInt(&body.DestAddrNpi); err != nil {
-		return err
+		return ErrEsmeRinvDstNpi
 	}
 	if err := d.readString(&body.DestinationAddr, 21); err != nil {
-		return err
+		return ErrEsmeRinvDstAdr
 	}
 	if err := d.readInt(&body.EsmClass); err != nil {
-		return err
+		return ErrEsmeRinvEsmClass
 	}
 	if err := d.readInt(&body.ProtocolID); err != nil {
 		return err
 	}
 	if err := d.readInt(&body.PriorityFlag); err != nil {
-		return err
-	}
-	if err := d.readInt(&body.PriorityFlag); err != nil {
-		return err
+		return ErrEsmeRinvPrtFlg
 	}
 	if err := d.readString(&body.ScheduleDeliveryTime, 17); err != nil {
-		return err
+		return ErrEsmeRinvSched
 	}
 	if err := d.readString(&body.ValidityPeriod, 17); err != nil {
-		return err
+		return ErrEsmeRinvExpiry
 	}
 	if err := d.readInt(&body.RegisteredDelivery); err != nil {
-		return err
+		return ErrEsmeRinvRegDlvFlg
 	}
 	if err := d.readInt(&body.ReplaceIfPresentFlag); err != nil {
-		return err
+		return ErrEsmeRinvRepFlag
 	}
 	if err := d.readInt(&body.DataCoding); err != nil {
-		return err
+		return ErrEsmeRinvDcs
 	}
 	if err := d.readInt(&body.SmDefaultMessageID); err != nil {
-		return err
+		return ErrEsmeRinvMsgId
 	}
 	if err := d.readInt(&body.SmLength); err != nil {
-		return err
+		return ErrEsmeRinvMsgLen
 	}
 	return d.readString(&body.ShortMessage, body.SmLength)
 }

@@ -52,103 +52,164 @@ const (
 
 //  Command status - SMPP v3.4 - 5.1.3 page 112-114
 const (
-	// No Error
-	EsmeRok = 0x00000000
-	// Message Length is invalid
-	EsmeRinvMsgLen = 0x00000001
-	// Command Length is invalid
-	EsmeRinvCmdLen = 0x00000002
-	// Invalid Command ID
-	EsmeRinvCmdId = 0x00000003
-	// Incorrect BIND Status for given command
-	EsmeRinvBndSts = 0x00000004
-	// ESME Already in Bound State
-	EsmeRalyBnd = 0x00000005
-	// Invalid Priority Flag
-	EsmeRinvPrtFlg = 0x00000006
-	// Invalid Registered Delivery Flag
-	EsmeRinvRegDlvFlg = 0x00000007
-	// System Error
-	EsmeRsysErr = 0x00000008
-	// Invalid Source Address
-	EsmeRinvSrcAdr = 0x0000000A
-	// Invalid Dest Addr
-	EsmeRinvDstAdr = 0x0000000B
-	// Message ID is invalid
-	EsmeRinvMsgId = 0x0000000C
-	// Bind Failed
-	EsmeRbindFail = 0x0000000D
-	// Invalid Password
-	EsmeRinvPaswd = 0x0000000E
-	// Invalid System ID
-	EsmeRinvSysId = 0x0000000F
-	// Cancel SM Failed
-	EsmeRcancelfail = 0x00000011
-	// Replace SM Failed
-	EsmeRreplaceFail = 0x00000013
-	// Message Queue Full
-	EsmeRmsgqFul = 0x00000014
-	// Invalid Service Type
-	EsmeRinvSerTyp = 0x00000015
-	// Invalid number of destinations
-	EsmeRinvNumDests = 0x00000033
-	// Invalid Distribution List name
-	EsmeRinvDlName = 0x00000034
-	// Destination flag (submit_multi)
-	EsmeRinvDestFlag = 0x00000040
-	// Invalid ‘submit with replace’ request (i.e. submit_sm with replace_if_present_flag set)
-	EsmeRinvSubRep = 0x00000042
-	// Invalid ESM_SUBMIT field data
-	EsmeRinvEsmSubmit = 0x00000043
-	// Cannot Submit to Distribution List
-	EsmeRcntSubDl = 0x00000044
-	// submit_sm or submit_multi failed
-	EsmeRsubmitFail = 0x00000045
-	// Invalid Source address TON
-	EsmeRinvSrcTon = 0x00000048
-	// Invalid Source address NPI
-	EsmeRinvSrcNpi = 0x00000049
-	// Invalid Destination address TON
-	EsmeRinvDstTon = 0x00000050
-	// Invalid Destination address NPI
-	EsmeRinvDstNpi = 0x00000051
-	// Invalid system_type field
-	EsmeRinvSysTyp = 0x00000053
-	// Invalid replace_if_present flag
-	EsmeRinvRepFlag = 0x00000054
-	// Invalid number of messages
-	EsmeRinvNumMsgs = 0x00000055
-	// Throttling error (ESME has exceeded allowed message limits)
-	EsmeRthrottled = 0x00000058
-	// Invalid Scheduled Delivery Time
-	EsmeRinvSched = 0x00000061
-	// Invalid message (Expiry time)
-	EsmeRinvExpiry = 0x00000062
-	// Predefined Message Invalid or Not Found
-	EsmeRinvDftMsgId = 0x00000063
-	// ESME Receiver Temporary App Error Code
-	EsmeRxTAppn = 0x00000064
-	// ESME Receiver Permanent App Error Code
-	EsmeRxPAppn = 0x00000065
-	// ESME Receiver Reject Message Error Code
-	EsmeRxRAppn = 0x00000066
-	// query_sm request failed
-	EsmeRqueryFail = 0x00000067
-	// Error in the optional part of the PDU Body.
+	EsmeRok              = 0x00000000
+	EsmeRinvMsgLen       = 0x00000001
+	EsmeRinvCmdLen       = 0x00000002
+	EsmeRinvCmdId        = 0x00000003
+	EsmeRinvBndSts       = 0x00000004
+	EsmeRalyBnd          = 0x00000005
+	EsmeRinvPrtFlg       = 0x00000006
+	EsmeRinvRegDlvFlg    = 0x00000007
+	EsmeRsysErr          = 0x00000008
+	EsmeRinvSrcAdr       = 0x0000000A
+	EsmeRinvDstAdr       = 0x0000000B
+	EsmeRinvMsgId        = 0x0000000C
+	EsmeRbindFail        = 0x0000000D
+	EsmeRinvPaswd        = 0x0000000E
+	EsmeRinvSysId        = 0x0000000F
+	EsmeRcancelFail      = 0x00000011
+	EsmeRreplaceFail     = 0x00000013
+	EsmeRmsgqFul         = 0x00000014
+	EsmeRinvSerTyp       = 0x00000015
+	EsmeRinvNumDests     = 0x00000033
+	EsmeRinvDlName       = 0x00000034
+	EsmeRinvDestFlag     = 0x00000040
+	EsmeRinvSubRep       = 0x00000042
+	EsmeRinvEsmClass     = 0x00000043
+	EsmeRcntSubDl        = 0x00000044
+	EsmeRsubmitFail      = 0x00000045
+	EsmeRinvSrcTon       = 0x00000048
+	EsmeRinvSrcNpi       = 0x00000049
+	EsmeRinvDstTon       = 0x00000050
+	EsmeRinvDstNpi       = 0x00000051
+	EsmeRinvSysTyp       = 0x00000053
+	EsmeRinvRepFlag      = 0x00000054
+	EsmeRinvNumMsgs      = 0x00000055
+	EsmeRthrottled       = 0x00000058
+	EsmeRinvSched        = 0x00000061
+	EsmeRinvExpiry       = 0x00000062
+	EsmeRinvDftMsgId     = 0x00000063
+	EsmeRxTAppn          = 0x00000064
+	EsmeRxPAppn          = 0x00000065
+	EsmeRxRAppn          = 0x00000066
+	EsmeRqueryFail       = 0x00000067
 	EsmeRinvoptParStream = 0x000000C0
-	// Optional Parameter not allowed
-	EsmeRoptParNotAllwd = 0x000000C1
-	// Invalid Parameter Length.
-	EsmeRinvParLen = 0x000000C2
-	// Expected Optional Parameter missing
+	EsmeRoptParNotAllwd  = 0x000000C1
+	EsmeRinvParLen       = 0x000000C2
 	EsmeRmissingOptParam = 0x000000C3
-	// Invalid Optional Parameter Value
-	EsmeRinvOptParamVal = 0x000000C4
-	// Delivery Failure (data_sm_resp)
+	EsmeRinvOptParamVal  = 0x000000C4
 	EsmeRdeliveryFailure = 0x000000FE
-	// Unknown Error
-	EsmeRunknownErr = 0x000000FF
+	EsmeRinvDcs          = 0x00000104
+	EsmeRunknownErr      = 0x000000FF
 )
+
+var ErrEsmeRinvMsgLen = errors.New("message length is invalid")
+var ErrEsmeRinvCmdLen = errors.New("command length is invalid")
+var ErrEsmeRinvCmdId = errors.New("invalid command id")
+var ErrEsmeRinvBndSts = errors.New("incorrect bind status for given command")
+var ErrEsmeRalyBnd = errors.New("esme already in bound state")
+var ErrEsmeRinvPrtFlg = errors.New("invalid priority flag")
+var ErrEsmeRinvRegDlvFlg = errors.New("invalid registered delivery flag")
+var ErrEsmeRsysErr = errors.New("system error")
+var ErrEsmeRinvSrcAdr = errors.New("invalid source address")
+var ErrEsmeRinvDstAdr = errors.New("invalid dest addr")
+var ErrEsmeRinvMsgId = errors.New("message id is invalid")
+var ErrEsmeRbindFail = errors.New("bind failed")
+var ErrEsmeRinvPaswd = errors.New("invalid password")
+var ErrEsmeRinvSysId = errors.New("invalid system id")
+var ErrEsmeRcancelFail = errors.New("cancel sm failed")
+var ErrEsmeRreplaceFail = errors.New("replace sm failed")
+var ErrEsmeRmsgqFul = errors.New("message queue full")
+var ErrEsmeRinvSerTyp = errors.New("invalid service type")
+var ErrEsmeRinvNumDests = errors.New("invalid number of destinations")
+var ErrEsmeRinvDlName = errors.New("invalid distribution list name")
+var ErrEsmeRinvDestFlag = errors.New("invalid destination flag")
+var ErrEsmeRinvSubRep = errors.New("invalid submit with replace request")
+var ErrEsmeRinvEsmClass = errors.New("invalid esm class set")
+var ErrEsmeRcntSubDl = errors.New("cannot submit to distribution list")
+var ErrEsmeRsubmitFail = errors.New("submit_sm or submit_multi failed")
+var ErrEsmeRinvSrcTon = errors.New("invalid source address ton")
+var ErrEsmeRinvSrcNpi = errors.New("invalid source address npi")
+var ErrEsmeRinvDstTon = errors.New("invalid destination address ton")
+var ErrEsmeRinvDstNpi = errors.New("invalid destination address npi")
+var ErrEsmeRinvSysTyp = errors.New("invalid system_type field")
+var ErrEsmeRinvRepFlag = errors.New("invalid replace_if_present flag")
+var ErrEsmeRinvNumMsgs = errors.New("invalid number of messages")
+var ErrEsmeRthrottled = errors.New("throttling error (esme has exceeded allowed message limits)")
+var ErrEsmeRinvSched = errors.New("invalid scheduled delivery time")
+var ErrEsmeRinvExpiry = errors.New("invalid message (expiry time)")
+var ErrEsmeRinvDftMsgId = errors.New("predefined message invalid or not found")
+var ErrEsmeRxTAppn = errors.New("esme receiver temporary app error code")
+var ErrEsmeRxPAppn = errors.New("esme receiver permanent app error code")
+var ErrEsmeRxRAppn = errors.New("esme receiver reject message error code")
+var ErrEsmeRqueryFail = errors.New("query_sm request failed")
+var ErrEsmeRinvoptParStream = errors.New("error in the optional part of the pdu body")
+var ErrEsmeRoptParNotAllwd = errors.New("optional parameter not allowed")
+var ErrEsmeRinvParLen = errors.New("invalid parameter length")
+var ErrEsmeRmissingOptParam = errors.New("expected optional parameter missing")
+var ErrEsmeRinvOptParamVal = errors.New("invalid optional parameter value")
+var ErrEsmeRdeliveryFailure = errors.New("delivery failure (data_sm_resp)")
+var ErrEsmeRinvDcs = errors.New("invalid data coding scheme")
+var ErrEsmeRunknownErr = errors.New("unknown error")
+
+var ErrCodes = map[int]error{
+	0x00000001: ErrEsmeRinvMsgLen,
+	0x00000002: ErrEsmeRinvCmdLen,
+	0x00000003: ErrEsmeRinvCmdId,
+	0x00000004: ErrEsmeRinvBndSts,
+	0x00000005: ErrEsmeRalyBnd,
+	0x00000006: ErrEsmeRinvPrtFlg,
+	0x00000007: ErrEsmeRinvRegDlvFlg,
+	0x00000008: ErrEsmeRsysErr,
+	0x0000000A: ErrEsmeRinvSrcAdr,
+	0x0000000B: ErrEsmeRinvDstAdr,
+	0x0000000C: ErrEsmeRinvMsgId,
+	0x0000000D: ErrEsmeRbindFail,
+	0x0000000E: ErrEsmeRinvPaswd,
+	0x0000000F: ErrEsmeRinvSysId,
+	0x00000011: ErrEsmeRcancelFail,
+	0x00000013: ErrEsmeRreplaceFail,
+	0x00000014: ErrEsmeRmsgqFul,
+	0x00000015: ErrEsmeRinvSerTyp,
+	0x00000033: ErrEsmeRinvNumDests,
+	0x00000034: ErrEsmeRinvDlName,
+	0x00000040: ErrEsmeRinvDestFlag,
+	0x00000042: ErrEsmeRinvSubRep,
+	0x00000043: ErrEsmeRinvEsmClass,
+	0x00000044: ErrEsmeRcntSubDl,
+	0x00000045: ErrEsmeRsubmitFail,
+	0x00000048: ErrEsmeRinvSrcTon,
+	0x00000049: ErrEsmeRinvSrcNpi,
+	0x00000050: ErrEsmeRinvDstTon,
+	0x00000051: ErrEsmeRinvDstNpi,
+	0x00000053: ErrEsmeRinvSysTyp,
+	0x00000054: ErrEsmeRinvRepFlag,
+	0x00000055: ErrEsmeRinvNumMsgs,
+	0x00000058: ErrEsmeRthrottled,
+	0x00000061: ErrEsmeRinvSched,
+	0x00000062: ErrEsmeRinvExpiry,
+	0x00000063: ErrEsmeRinvDftMsgId,
+	0x00000064: ErrEsmeRxTAppn,
+	0x00000065: ErrEsmeRxPAppn,
+	0x00000066: ErrEsmeRxRAppn,
+	0x00000067: ErrEsmeRqueryFail,
+	0x000000C0: ErrEsmeRinvoptParStream,
+	0x000000C1: ErrEsmeRoptParNotAllwd,
+	0x000000C2: ErrEsmeRinvParLen,
+	0x000000C3: ErrEsmeRmissingOptParam,
+	0x000000C4: ErrEsmeRinvOptParamVal,
+	0x000000FE: ErrEsmeRdeliveryFailure,
+	0x00000104: ErrEsmeRinvDcs,
+	0x000000FF: ErrEsmeRunknownErr,
+}
+
+// Err returns error by code
+func Err(code int) error {
+	if err, ok := ErrCodes[code]; ok {
+		return err
+	}
+	return ErrEsmeRunknownErr
+}
 
 // SMPP v3.4 - 5.2.5 page 117
 const (
@@ -245,23 +306,17 @@ const DataCodingDefault = 0
 const (
 	DataCodingIa5         = 1
 	DataCodingBinaryAlias = 2
-	// Latin 1
-	DataCodingIso88591 = 3
-	DataCodingBinary   = 4
-	DataCodingJis      = 5
-	// Cyrllic
-	DataCodingIso88595 = 6
-	// Latin/Hebrew
-	DataCodingIso88598 = 7
-	// UCS-2BE (Big Endian)
-	DataCodingUcs2      = 8
-	DataCodingPictogram = 9
-	// Music codes
-	DataCodingIso2022Jp = 10
-	// Extended Kanji JIS
-	DataCodingKanji   = 13
-	DataCodingKsc5601 = 14
-	DataCodingUtf16be = 15
+	DataCodingIso88591    = 3
+	DataCodingBinary      = 4
+	DataCodingJis         = 5
+	DataCodingIso88595    = 6
+	DataCodingIso88598    = 7
+	DataCodingUcs2        = 8
+	DataCodingPictogram   = 9
+	DataCodingIso2022Jp   = 10
+	DataCodingKanji       = 13
+	DataCodingKsc5601     = 14
+	DataCodingUtf16be     = 15
 )
 
 // SMPP v3.4 - 5.2.21 page 128
