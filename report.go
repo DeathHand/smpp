@@ -31,49 +31,17 @@ type DeliveryReportParser struct {
 }
 
 // NewDeliveryReportParser parser constructor
-func NewDeliveryReportParser() (*DeliveryReportParser, error) {
-	idRegex, err := regexp.Compile("id:(\\w+)")
-	if err != nil {
-		return nil, err
-	}
-	subRegexp, err := regexp.Compile("sub:(\\w+)")
-	if err != nil {
-		return nil, err
-	}
-	dlvrdRegexp, err := regexp.Compile("dlvrd:(\\w+)")
-	if err != nil {
-		return nil, err
-	}
-	submitDateRegexp, err := regexp.Compile("submit date:(\\w+)")
-	if err != nil {
-		return nil, err
-	}
-	doneDateRegexp, err := regexp.Compile("done date:(\\w+)")
-	if err != nil {
-		return nil, err
-	}
-	statRegexp, err := regexp.Compile("stat:(\\w+)")
-	if err != nil {
-		return nil, err
-	}
-	errRegexp, err := regexp.Compile("err:(\\w+)")
-	if err != nil {
-		return nil, err
-	}
-	textRegexp, err := regexp.Compile("Text:(.+)")
-	if err != nil {
-		return nil, err
-	}
-	return &DeliveryReportParser{
-		idRegex:          idRegex,
-		subRegexp:        subRegexp,
-		dlvrdRegexp:      dlvrdRegexp,
-		submitDateRegexp: submitDateRegexp,
-		doneDateRegexp:   doneDateRegexp,
-		statRegexp:       statRegexp,
-		errRegexp:        errRegexp,
-		textRegexp:       textRegexp,
-	}, nil
+func NewDeliveryReportParser() *DeliveryReportParser {
+	p := new(DeliveryReportParser)
+	p.idRegex, _ = regexp.Compile("id:(\\w+)")
+	p.subRegexp, _ = regexp.Compile("sub:(\\w+)")
+	p.dlvrdRegexp, _ = regexp.Compile("dlvrd:(\\w+)")
+	p.submitDateRegexp, _ = regexp.Compile("submit date:(\\w+)")
+	p.doneDateRegexp, _ = regexp.Compile("done date:(\\w+)")
+	p.statRegexp, _ = regexp.Compile("stat:(\\w+)")
+	p.errRegexp, _ = regexp.Compile("err:(\\w+)")
+	p.textRegexp, _ = regexp.Compile("Text:(.+)")
+	return p
 }
 
 func (p *DeliveryReportParser) splitAttr(attr string) string {
