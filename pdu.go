@@ -67,7 +67,7 @@ type BindReceiverPdu struct {
 type BindReceiverRespPdu struct {
 	Header *Header
 	Body   *BindRespBody
-	Tlv    *TlvMap
+	Tlv    TlvMap
 }
 
 type BindTransmitterPdu struct {
@@ -78,7 +78,7 @@ type BindTransmitterPdu struct {
 type BindTransmitterRespPdu struct {
 	Header *Header
 	Body   *BindRespBody
-	Tlv    *TlvMap
+	Tlv    TlvMap
 }
 
 type BindTransceiverPdu struct {
@@ -89,13 +89,13 @@ type BindTransceiverPdu struct {
 type BindTransceiverRespPdu struct {
 	Header *Header
 	Body   *BindRespBody
-	Tlv    *TlvMap
+	Tlv    TlvMap
 }
 
 type SubmitSmPdu struct {
 	Header *Header
 	Body   *SmBody
-	Tlv    *TlvMap
+	Tlv    TlvMap
 }
 
 type SubmitSmRespPdu struct {
@@ -106,7 +106,7 @@ type SubmitSmRespPdu struct {
 type DeliverSmPdu struct {
 	Header *Header
 	Body   *SmBody
-	Tlv    *TlvMap
+	Tlv    TlvMap
 }
 
 type DeliverSmRespPdu struct {

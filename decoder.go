@@ -62,7 +62,7 @@ func (d *Decoder) readHeader(header *Header) error {
 }
 
 // readTlvMap reads smpp tlv map
-func (d *Decoder) readTlvMap(tlvMap *TlvMap) error {
+func (d *Decoder) readTlvMap(tlvMap TlvMap) error {
 	for d.r.Len() > 0 {
 		tlv := new(Tlv)
 		if err := d.readInt(&tlv.Tag); err != nil {
@@ -74,7 +74,7 @@ func (d *Decoder) readTlvMap(tlvMap *TlvMap) error {
 		if err := d.readString(&tlv.Value, tlv.Length); err != nil {
 			return ErrEsmeRinvOptParamVal
 		}
-		(*tlvMap)[TlvName(tlv.Tag)] = *tlv
+		tlvMap[TlvName(tlv.Tag)] = *tlv
 	}
 	return nil
 }
