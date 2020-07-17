@@ -26,5 +26,5 @@ func (w *Writer) Write(buffer *bytes.Buffer) error {
 	if n < l {
 		return io.ErrShortWrite
 	}
-	return nil
+	return w.w.Flush()
 }
