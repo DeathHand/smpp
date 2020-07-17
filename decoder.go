@@ -187,13 +187,17 @@ func (d *Decoder) Decode() (interface{}, error) {
 	}
 	switch header.CommandID {
 	case BindReceiver:
-		p := &BindReceiverPdu{Header: header}
+		p := &BindReceiverPdu{Header: header, Body: &BindBody{}}
 		if err := d.readBindBody(p.Body); err != nil {
 			return nil, err
 		}
 		return p, nil
 	case BindReceiverResp:
-		p := &BindReceiverRespPdu{Header: header}
+		p := &BindReceiverRespPdu{
+			Header: header,
+			Body:   &BindRespBody{},
+			Tlv:    TlvMap{},
+		}
 		if err := d.readBindRespBody(p.Body); err != nil {
 			return nil, err
 		}
@@ -204,13 +208,17 @@ func (d *Decoder) Decode() (interface{}, error) {
 		}
 		return p, nil
 	case BindTransmitter:
-		p := &BindTransmitterPdu{Header: header}
+		p := &BindTransmitterPdu{Header: header, Body: &BindBody{}}
 		if err := d.readBindBody(p.Body); err != nil {
 			return nil, err
 		}
 		return p, nil
 	case BindTransmitterResp:
-		p := &BindTransceiverRespPdu{Header: header}
+		p := &BindTransceiverRespPdu{
+			Header: header,
+			Body:   &BindRespBody{},
+			Tlv:    TlvMap{},
+		}
 		if err := d.readBindRespBody(p.Body); err != nil {
 			return nil, err
 		}
@@ -221,13 +229,17 @@ func (d *Decoder) Decode() (interface{}, error) {
 		}
 		return p, nil
 	case BindTransceiver:
-		p := BindTransceiverPdu{Header: header}
+		p := BindTransceiverPdu{Header: header, Body: &BindBody{}}
 		if err := d.readBindBody(p.Body); err != nil {
 			return nil, err
 		}
 		return p, nil
 	case BindTransceiverResp:
-		p := BindTransceiverRespPdu{Header: header}
+		p := BindTransceiverRespPdu{
+			Header: header,
+			Body:   &BindRespBody{},
+			Tlv:    TlvMap{},
+		}
 		if err := d.readBindRespBody(p.Body); err != nil {
 			return nil, err
 		}
@@ -248,7 +260,11 @@ func (d *Decoder) Decode() (interface{}, error) {
 		}
 		return p, nil
 	case SubmitSm:
-		p := &SubmitSmPdu{Header: header}
+		p := &SubmitSmPdu{
+			Header: header,
+			Body:   &SmBody{},
+			Tlv:    TlvMap{},
+		}
 		if err := d.readSmBody(p.Body); err != nil {
 			return nil, err
 		}
@@ -259,13 +275,17 @@ func (d *Decoder) Decode() (interface{}, error) {
 		}
 		return p, nil
 	case SubmitSmResp:
-		p := &SubmitSmRespPdu{Header: header}
+		p := &SubmitSmRespPdu{Header: header, Body: &SmRespBody{}}
 		if err := d.readSmRespBody(p.Body); err != nil {
 			return nil, err
 		}
 		return p, nil
 	case DeliverSm:
-		p := &DeliverSmPdu{Header: header}
+		p := &DeliverSmPdu{
+			Header: header,
+			Body:   &SmBody{},
+			Tlv:    TlvMap{},
+		}
 		if err := d.readSmBody(p.Body); err != nil {
 			return nil, err
 		}
@@ -276,7 +296,7 @@ func (d *Decoder) Decode() (interface{}, error) {
 		}
 		return p, nil
 	case DeliverSmResp:
-		p := &DeliverSmRespPdu{Header: header}
+		p := &DeliverSmRespPdu{Header: header, Body: &SmRespBody{}}
 		if err := d.readSmRespBody(p.Body); err != nil {
 			return nil, err
 		}
