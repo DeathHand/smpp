@@ -22,85 +22,85 @@ const (
 )
 
 // SMPP v3.4 - 3.2 page 38
-const PduHeaderLength int = 16
+const PduHeaderLength uint32 = 16
 
 // Command ids - SMPP v3.4 - 5.1.2.1 page 110-111
 const (
-	GenericNack         = 0x80000000
-	BindReceiver        = 0x00000001
-	BindReceiverResp    = 0x80000001
-	BindTransmitter     = 0x00000002
-	BindTransmitterResp = 0x80000002
-	QuerySm             = 0x00000003
-	QuerySmResp         = 0x80000003
-	SubmitSm            = 0x00000004
-	SubmitSmResp        = 0x80000004
-	DeliverSm           = 0x00000005
-	DeliverSmResp       = 0x80000005
-	Unbind              = 0x00000006
-	UnbindResp          = 0x80000006
-	ReplaceSm           = 0x00000007
-	ReplaceSmResp       = 0x80000007
-	CancelSm            = 0x00000008
-	CancelSmResp        = 0x80000008
-	BindTransceiver     = 0x00000009
-	BindTransceiverResp = 0x80000009
-	OutBind             = 0x0000000B
-	EnquireLink         = 0x00000015
-	EnquireLinkResp     = 0x80000015
+	GenericNack         uint32 = 0x80000000
+	BindReceiver        uint32 = 0x00000001
+	BindReceiverResp    uint32 = 0x80000001
+	BindTransmitter     uint32 = 0x00000002
+	BindTransmitterResp uint32 = 0x80000002
+	QuerySm             uint32 = 0x00000003
+	QuerySmResp         uint32 = 0x80000003
+	SubmitSm            uint32 = 0x00000004
+	SubmitSmResp        uint32 = 0x80000004
+	DeliverSm           uint32 = 0x00000005
+	DeliverSmResp       uint32 = 0x80000005
+	Unbind              uint32 = 0x00000006
+	UnbindResp          uint32 = 0x80000006
+	ReplaceSm           uint32 = 0x00000007
+	ReplaceSmResp       uint32 = 0x80000007
+	CancelSm            uint32 = 0x00000008
+	CancelSmResp        uint32 = 0x80000008
+	BindTransceiver     uint32 = 0x00000009
+	BindTransceiverResp uint32 = 0x80000009
+	OutBind             uint32 = 0x0000000B
+	EnquireLink         uint32 = 0x00000015
+	EnquireLinkResp     uint32 = 0x80000015
 )
 
 //  Command status - SMPP v3.4 - 5.1.3 page 112-114
 const (
-	EsmeRok              = 0x00000000
-	EsmeRinvMsgLen       = 0x00000001
-	EsmeRinvCmdLen       = 0x00000002
-	EsmeRinvCmdId        = 0x00000003
-	EsmeRinvBndSts       = 0x00000004
-	EsmeRalyBnd          = 0x00000005
-	EsmeRinvPrtFlg       = 0x00000006
-	EsmeRinvRegDlvFlg    = 0x00000007
-	EsmeRsysErr          = 0x00000008
-	EsmeRinvSrcAdr       = 0x0000000A
-	EsmeRinvDstAdr       = 0x0000000B
-	EsmeRinvMsgId        = 0x0000000C
-	EsmeRbindFail        = 0x0000000D
-	EsmeRinvPaswd        = 0x0000000E
-	EsmeRinvSysId        = 0x0000000F
-	EsmeRcancelFail      = 0x00000011
-	EsmeRreplaceFail     = 0x00000013
-	EsmeRmsgqFul         = 0x00000014
-	EsmeRinvSerTyp       = 0x00000015
-	EsmeRinvNumDests     = 0x00000033
-	EsmeRinvDlName       = 0x00000034
-	EsmeRinvDestFlag     = 0x00000040
-	EsmeRinvSubRep       = 0x00000042
-	EsmeRinvEsmClass     = 0x00000043
-	EsmeRcntSubDl        = 0x00000044
-	EsmeRsubmitFail      = 0x00000045
-	EsmeRinvSrcTon       = 0x00000048
-	EsmeRinvSrcNpi       = 0x00000049
-	EsmeRinvDstTon       = 0x00000050
-	EsmeRinvDstNpi       = 0x00000051
-	EsmeRinvSysTyp       = 0x00000053
-	EsmeRinvRepFlag      = 0x00000054
-	EsmeRinvNumMsgs      = 0x00000055
-	EsmeRthrottled       = 0x00000058
-	EsmeRinvSched        = 0x00000061
-	EsmeRinvExpiry       = 0x00000062
-	EsmeRinvDftMsgId     = 0x00000063
-	EsmeRxTAppn          = 0x00000064
-	EsmeRxPAppn          = 0x00000065
-	EsmeRxRAppn          = 0x00000066
-	EsmeRqueryFail       = 0x00000067
-	EsmeRinvoptParStream = 0x000000C0
-	EsmeRoptParNotAllwd  = 0x000000C1
-	EsmeRinvParLen       = 0x000000C2
-	EsmeRmissingOptParam = 0x000000C3
-	EsmeRinvOptParamVal  = 0x000000C4
-	EsmeRdeliveryFailure = 0x000000FE
-	EsmeRinvDcs          = 0x00000104
-	EsmeRunknownErr      = 0x000000FF
+	EsmeRok              uint32 = 0x00000000
+	EsmeRinvMsgLen       uint32 = 0x00000001
+	EsmeRinvCmdLen       uint32 = 0x00000002
+	EsmeRinvCmdId        uint32 = 0x00000003
+	EsmeRinvBndSts       uint32 = 0x00000004
+	EsmeRalyBnd          uint32 = 0x00000005
+	EsmeRinvPrtFlg       uint32 = 0x00000006
+	EsmeRinvRegDlvFlg    uint32 = 0x00000007
+	EsmeRsysErr          uint32 = 0x00000008
+	EsmeRinvSrcAdr       uint32 = 0x0000000A
+	EsmeRinvDstAdr       uint32 = 0x0000000B
+	EsmeRinvMsgId        uint32 = 0x0000000C
+	EsmeRbindFail        uint32 = 0x0000000D
+	EsmeRinvPaswd        uint32 = 0x0000000E
+	EsmeRinvSysId        uint32 = 0x0000000F
+	EsmeRcancelFail      uint32 = 0x00000011
+	EsmeRreplaceFail     uint32 = 0x00000013
+	EsmeRmsgqFul         uint32 = 0x00000014
+	EsmeRinvSerTyp       uint32 = 0x00000015
+	EsmeRinvNumDests     uint32 = 0x00000033
+	EsmeRinvDlName       uint32 = 0x00000034
+	EsmeRinvDestFlag     uint32 = 0x00000040
+	EsmeRinvSubRep       uint32 = 0x00000042
+	EsmeRinvEsmClass     uint32 = 0x00000043
+	EsmeRcntSubDl        uint32 = 0x00000044
+	EsmeRsubmitFail      uint32 = 0x00000045
+	EsmeRinvSrcTon       uint32 = 0x00000048
+	EsmeRinvSrcNpi       uint32 = 0x00000049
+	EsmeRinvDstTon       uint32 = 0x00000050
+	EsmeRinvDstNpi       uint32 = 0x00000051
+	EsmeRinvSysTyp       uint32 = 0x00000053
+	EsmeRinvRepFlag      uint32 = 0x00000054
+	EsmeRinvNumMsgs      uint32 = 0x00000055
+	EsmeRthrottled       uint32 = 0x00000058
+	EsmeRinvSched        uint32 = 0x00000061
+	EsmeRinvExpiry       uint32 = 0x00000062
+	EsmeRinvDftMsgId     uint32 = 0x00000063
+	EsmeRxTAppn          uint32 = 0x00000064
+	EsmeRxPAppn          uint32 = 0x00000065
+	EsmeRxRAppn          uint32 = 0x00000066
+	EsmeRqueryFail       uint32 = 0x00000067
+	EsmeRinvoptParStream uint32 = 0x000000C0
+	EsmeRoptParNotAllwd  uint32 = 0x000000C1
+	EsmeRinvParLen       uint32 = 0x000000C2
+	EsmeRmissingOptParam uint32 = 0x000000C3
+	EsmeRinvOptParamVal  uint32 = 0x000000C4
+	EsmeRdeliveryFailure uint32 = 0x000000FE
+	EsmeRinvDcs          uint32 = 0x00000104
+	EsmeRunknownErr      uint32 = 0x000000FF
 )
 
 var ErrEsmeRinvMsgLen = errors.New("message length is invalid")
@@ -152,7 +152,7 @@ var ErrEsmeRdeliveryFailure = errors.New("delivery failure (data_sm_resp)")
 var ErrEsmeRinvDcs = errors.New("invalid data coding scheme")
 var ErrEsmeRunknownErr = errors.New("unknown error")
 
-var ErrCodes = map[int]error{
+var ErrCodes = map[uint32]error{
 	0x00000001: ErrEsmeRinvMsgLen,
 	0x00000002: ErrEsmeRinvCmdLen,
 	0x00000003: ErrEsmeRinvCmdId,
@@ -204,7 +204,7 @@ var ErrCodes = map[int]error{
 }
 
 // Err returns error by code
-func Err(code int) error {
+func Err(code uint32) error {
 	if err, ok := ErrCodes[code]; ok {
 		return err
 	}
@@ -213,182 +213,182 @@ func Err(code int) error {
 
 // SMPP v3.4 - 5.2.5 page 117
 const (
-	TonUnknown          = 0x00
-	TonInternational    = 0x01
-	TonNational         = 0x02
-	TonNetworkSpecific  = 0x03
-	TonSubscriberNumber = 0x04
-	TonAlphanumeric     = 0x05
-	TonAbbreviated      = 0x06
+	TonUnknown          uint32 = 0x00
+	TonInternational    uint32 = 0x01
+	TonNational         uint32 = 0x02
+	TonNetworkSpecific  uint32 = 0x03
+	TonSubscriberNumber uint32 = 0x04
+	TonAlphanumeric     uint32 = 0x05
+	TonAbbreviated      uint32 = 0x06
 )
 
 // SMPP v3.4 - 5.2.6 page 118
 const (
-	NpiUnknown   = 0x00
-	NpiE164      = 0x01
-	NpiData      = 0x03
-	NpiTelex     = 0x04
-	NpiE212      = 0x06
-	NpiNational  = 0x08
-	NpiPrivate   = 0x09
-	NpiErmes     = 0x0a
-	NpiInternet  = 0x0e
-	NpiWapclient = 0x12
+	NpiUnknown   uint32 = 0x00
+	NpiE164      uint32 = 0x01
+	NpiData      uint32 = 0x03
+	NpiTelex     uint32 = 0x04
+	NpiE212      uint32 = 0x06
+	NpiNational  uint32 = 0x08
+	NpiPrivate   uint32 = 0x09
+	NpiErmes     uint32 = 0x0a
+	NpiInternet  uint32 = 0x0e
+	NpiWapclient uint32 = 0x12
 )
 
 // ESM bits 1-0 - SMPP v3.4 - 5.2.12 page 121-122
 const (
-	EsmSubmitModeDatagram        = 0x01
-	EsmSubmitModeForward         = 0x02
-	EsmSubmitModeStoreAndForward = 0x03
+	EsmSubmitModeDatagram        uint32 = 0x01
+	EsmSubmitModeForward         uint32 = 0x02
+	EsmSubmitModeStoreAndForward uint32 = 0x03
 )
 
 // ESM bits 5-2
 const (
-	EsmSubmitDefault      = 0x00
-	EsmSubmitBinary       = 0x04
-	EsmSubmitTypeEsmeDAck = 0x08
-	EsmSubmitTypeEsmeUAck = 0x10
-	EsmDeliverSmscReceipt = 0x04
-	EsmDeliverSmeAck      = 0x08
-	EsmDeliverUAck        = 0x10
-	EsmDeliverConvAbort   = 0x18
+	EsmSubmitDefault      uint32 = 0x00
+	EsmSubmitBinary       uint32 = 0x04
+	EsmSubmitTypeEsmeDAck uint32 = 0x08
+	EsmSubmitTypeEsmeUAck uint32 = 0x10
+	EsmDeliverSmscReceipt uint32 = 0x04
+	EsmDeliverSmeAck      uint32 = 0x08
+	EsmDeliverUAck        uint32 = 0x10
+	EsmDeliverConvAbort   uint32 = 0x18
 )
 
 // Intermediate delivery notification
-const EsmDeliverIdn = 0x20
+const EsmDeliverIdn uint32 = 0x20
 
 // ESM bits 7-6
 const (
-	EsmUdhiNone  = 0x00
-	EsmUdhi      = 0x40
-	EsmUdhiDlr   = 0x04
-	EsmReplyPath = 0x80
+	EsmUdhiNone  uint32 = 0x00
+	EsmUdhi      uint32 = 0x40
+	EsmUdhiDlr   uint32 = 0x04
+	EsmReplyPath uint32 = 0x80
 )
 
 // SMPP v3.4 - 5.2.13 page 123
-const ProtocolId = 0x34
+const ProtocolId uint32 = 0x34
 
 // SMPP v3.4 - 5.2.14 page 123
 const (
-	PriorityFlag0 = 0x00
-	PriorityFlag1 = 0x01
-	PriorityFlag2 = 0x02
-	PriorityFlag3 = 0x03
+	PriorityFlag0 uint32 = 0x00
+	PriorityFlag1 uint32 = 0x01
+	PriorityFlag2 uint32 = 0x02
+	PriorityFlag3 uint32 = 0x03
 )
 
 // SMPP v3.4 - 5.2.17 page 124
-const RegDeliveryNo = 0x00
+const RegDeliveryNo uint32 = 0x00
 
 // both success and failure
 const (
-	RegDeliverySmscBoth   = 0x01
-	RegDeliverySmscFailed = 0x02
-	RegDeliverySmeDAck    = 0x04
-	RegDeliverySmeUAck    = 0x08
-	RegDeliverySmeBoth    = 0x10
+	RegDeliverySmscBoth   uint32 = 0x01
+	RegDeliverySmscFailed uint32 = 0x02
+	RegDeliverySmeDAck    uint32 = 0x04
+	RegDeliverySmeUAck    uint32 = 0x08
+	RegDeliverySmeBoth    uint32 = 0x10
 )
 
 // Intermediate notification
-const RegDeliveryIdn = 0x16
+const RegDeliveryIdn uint32 = 0x16
 
 // SMPP v3.4 - 5.2.18 page 125
 const (
-	ReplaceNo  = 0x00
-	ReplaceYes = 0x01
+	ReplaceNo  uint32 = 0x00
+	ReplaceYes uint32 = 0x01
 )
 
 // SMPP v3.4 - 5.2.19 page 126
 //UTF-8 as internal SMSC coding
-const DataCodingDefault = 0
+const DataCodingDefault uint32 = 0
 
 // IA5 (CCITT T.50)/ASCII (ANSI X3.4)
 const (
-	DataCodingIa5         = 1
-	DataCodingBinaryAlias = 2
-	DataCodingIso88591    = 3
-	DataCodingBinary      = 4
-	DataCodingJis         = 5
-	DataCodingIso88595    = 6
-	DataCodingIso88598    = 7
-	DataCodingUcs2        = 8
-	DataCodingPictogram   = 9
-	DataCodingIso2022Jp   = 10
-	DataCodingKanji       = 13
-	DataCodingKsc5601     = 14
-	DataCodingUtf16be     = 15
+	DataCodingIa5         uint32 = 1
+	DataCodingBinaryAlias uint32 = 2
+	DataCodingIso88591    uint32 = 3
+	DataCodingBinary      uint32 = 4
+	DataCodingJis         uint32 = 5
+	DataCodingIso88595    uint32 = 6
+	DataCodingIso88598    uint32 = 7
+	DataCodingUcs2        uint32 = 8
+	DataCodingPictogram   uint32 = 9
+	DataCodingIso2022Jp   uint32 = 10
+	DataCodingKanji       uint32 = 13
+	DataCodingKsc5601     uint32 = 14
+	DataCodingUtf16be     uint32 = 15
 )
 
 // SMPP v3.4 - 5.2.21 page 128
-const NoUserDataSm = 0x00
+const NoUserDataSm uint32 = 0x00
 
 // SMPP v3.4 - 5.2.25 page 129
 const (
-	DestFlagSme      = 1
-	DestFlagDistlist = 2
+	DestFlagSme      uint32 = 1
+	DestFlagDistlist uint32 = 2
 )
 
 // SMPP v3.4 - 5.2.28 page 130
 const (
-	StateEnroute       = 1
-	StateDelivered     = 2
-	StateExpired       = 3
-	StateDeleted       = 4
-	StateUndeliverable = 5
-	StateAccepted      = 6
-	StateUnknown       = 7
-	StateRejected      = 8
+	StateEnroute       uint32 = 1
+	StateDelivered     uint32 = 2
+	StateExpired       uint32 = 3
+	StateDeleted       uint32 = 4
+	StateUndeliverable uint32 = 5
+	StateAccepted      uint32 = 6
+	StateUnknown       uint32 = 7
+	StateRejected      uint32 = 8
 )
 
 // SMPP v3.4 - 5.2.28 page 132
 const (
-	DestAddrSubunitTlv          = 0x0005
-	DestNetworkTypeTlv          = 0x0006
-	DestBearerTypeTlv           = 0x0007
-	DestTelematicsIdTlv         = 0x0008
-	SourceAddrSubunitTlv        = 0x000D
-	SourceNetworkTypeTlv        = 0x000E
-	SourceBearerTypeTlv         = 0x000F
-	SourceTelematicsIdTlv       = 0x0010
-	QosTimeToLiveTlv            = 0x0017
-	PayloadTypeTlv              = 0x0019
-	AdditionalStatusInfoTextTlv = 0x001D
-	ReceiptedMessageIdTlv       = 0x001E
-	MsMsgWaitFacilitiesTlv      = 0x0030
-	PrivacyIndicatorTlv         = 0x0201
-	SourceSubaddressTlv         = 0x0202
-	DestSubaddressTlv           = 0x0203
-	UserMessageReferenceTlv     = 0x0204
-	UserResponseCodeTlv         = 0x0205
-	SourcePortTlv               = 0x020A
-	DestinationPortTlv          = 0x020B
-	SarMsgRefNumTlv             = 0x020C
-	LanguageIndicatorTlv        = 0x020D
-	SarTotalSegmentsTlv         = 0x020E
-	SarSegmentSeqnumTlv         = 0x020F
-	ScInterfaceVersionTlv       = 0x0210
-	CallbackNumPresIndTlv       = 0x0302
-	CallbackNumAtagTlv          = 0x0303
-	NumberOfMessagesTlv         = 0x0304
-	CallbackNumTlv              = 0x0381
-	DpfResultTlv                = 0x0420
-	SetDpfTlv                   = 0x0421
-	MsAvailabilityStatusTlv     = 0x0422
-	NetworkErrorCodeTlv         = 0x0423
-	MessagePayloadTlv           = 0x0424
-	DeliveryFailureReasonTlv    = 0x0425
-	MoreMessagesToSendTlv       = 0x0426
-	MessageStateTlv             = 0x0427
-	UssdServiceOpTlv            = 0x0501
-	DisplayTimeTlv              = 0x1201
-	SmsSignalTlv                = 0x1203
-	MsValidityTlv               = 0x1204
-	AlertOnMessageDeliveryTlv   = 0x130C
-	ItsReplyTypeTlv             = 0x1380
-	ItsSessionInfoTlv           = 0x1383
+	DestAddrSubunitTlv          uint32 = 0x0005
+	DestNetworkTypeTlv          uint32 = 0x0006
+	DestBearerTypeTlv           uint32 = 0x0007
+	DestTelematicsIdTlv         uint32 = 0x0008
+	SourceAddrSubunitTlv        uint32 = 0x000D
+	SourceNetworkTypeTlv        uint32 = 0x000E
+	SourceBearerTypeTlv         uint32 = 0x000F
+	SourceTelematicsIdTlv       uint32 = 0x0010
+	QosTimeToLiveTlv            uint32 = 0x0017
+	PayloadTypeTlv              uint32 = 0x0019
+	AdditionalStatusInfoTextTlv uint32 = 0x001D
+	ReceiptedMessageIdTlv       uint32 = 0x001E
+	MsMsgWaitFacilitiesTlv      uint32 = 0x0030
+	PrivacyIndicatorTlv         uint32 = 0x0201
+	SourceSubaddressTlv         uint32 = 0x0202
+	DestSubaddressTlv           uint32 = 0x0203
+	UserMessageReferenceTlv     uint32 = 0x0204
+	UserResponseCodeTlv         uint32 = 0x0205
+	SourcePortTlv               uint32 = 0x020A
+	DestinationPortTlv          uint32 = 0x020B
+	SarMsgRefNumTlv             uint32 = 0x020C
+	LanguageIndicatorTlv        uint32 = 0x020D
+	SarTotalSegmentsTlv         uint32 = 0x020E
+	SarSegmentSeqnumTlv         uint32 = 0x020F
+	ScInterfaceVersionTlv       uint32 = 0x0210
+	CallbackNumPresIndTlv       uint32 = 0x0302
+	CallbackNumAtagTlv          uint32 = 0x0303
+	NumberOfMessagesTlv         uint32 = 0x0304
+	CallbackNumTlv              uint32 = 0x0381
+	DpfResultTlv                uint32 = 0x0420
+	SetDpfTlv                   uint32 = 0x0421
+	MsAvailabilityStatusTlv     uint32 = 0x0422
+	NetworkErrorCodeTlv         uint32 = 0x0423
+	MessagePayloadTlv           uint32 = 0x0424
+	DeliveryFailureReasonTlv    uint32 = 0x0425
+	MoreMessagesToSendTlv       uint32 = 0x0426
+	MessageStateTlv             uint32 = 0x0427
+	UssdServiceOpTlv            uint32 = 0x0501
+	DisplayTimeTlv              uint32 = 0x1201
+	SmsSignalTlv                uint32 = 0x1203
+	MsValidityTlv               uint32 = 0x1204
+	AlertOnMessageDeliveryTlv   uint32 = 0x130C
+	ItsReplyTypeTlv             uint32 = 0x1380
+	ItsSessionInfoTlv           uint32 = 0x1383
 )
 
-var TlvNames = map[int]string{
+var TlvNames = map[uint32]string{
 	DestAddrSubunitTlv:          "dest_addr_subunit",
 	DestNetworkTypeTlv:          "dest_network_type",
 	DestBearerTypeTlv:           "dest_bearer_type",
@@ -436,7 +436,7 @@ var TlvNames = map[int]string{
 }
 
 // TlvName returns tlv tag name by tag id
-func TlvName(tag int) string {
+func TlvName(tag uint32) string {
 	if name, ok := TlvNames[tag]; ok {
 		return name
 	}

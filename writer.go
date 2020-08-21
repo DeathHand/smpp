@@ -1,30 +1,30 @@
 package smpp
 
 import (
-	"bufio"
 	"bytes"
 	"io"
+	"net"
 )
 
 // Writer writes pdu buffer
 type Writer struct {
-	w *bufio.Writer
+	conn *net.TCPConn
 }
 
 // NewWriter writer constructor
-func NewWriter(w *bufio.Writer) *Writer {
-	return &Writer{w: w}
+func NewWriter(conn *net.TCPConn) *Writer {
+	return &Writer{conn: conn}
 }
 
 // Write write pdu
 func (w *Writer) Write(buffer *bytes.Buffer) error {
 	l := buffer.Len()
-	n, err := w.w.Write(buffer.Bytes())
+	n, err := w.conn.Write(buffer.Bytes())
 	if err != nil {
 		return err
 	}
 	if n < l {
 		return io.ErrShortWrite
 	}
-	return w.w.Flush()
+	return nil
 }

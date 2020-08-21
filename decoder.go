@@ -2,6 +2,7 @@ package smpp
 
 import (
 	"bytes"
+	"encoding/binary"
 	"io"
 	"strings"
 )
@@ -17,23 +18,23 @@ func NewDecoder(r *bytes.Buffer) *Decoder {
 }
 
 // readInt reads smpp integer
-func (d *Decoder) readInt(v *int) error {
-	p := make([]byte, 4)
-	n, err := d.r.Read(p)
+func (d *Decoder) readInt(v *uint32) error {
+	b := make([]byte, 4)
+	n, err := d.r.Read(b)
 	if err != nil {
 		return err
 	}
-	if n < len(p) {
+	if n < len(b) {
 		return io.EOF
 	}
-	*v = int(p[3]) | int(p[2])<<8 | int(p[1])<<16 | int(p[0])<<24
+	*v = binary.BigEndian.Uint32(b)
 	return nil
 }
 
 // readString reads smpp octet string
-func (d *Decoder) readString(v *string, length int) error {
+func (d *Decoder) readString(v *string, length uint32) error {
 	w := &strings.Builder{}
-	for i := 0; i < length; i++ {
+	for i := uint32(0); i < length; i++ {
 		b, err := d.r.ReadByte()
 		if err != nil {
 			return err

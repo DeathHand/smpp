@@ -2,6 +2,7 @@ package smpp
 
 import (
 	"bytes"
+	"encoding/binary"
 	"io"
 )
 
@@ -22,17 +23,17 @@ func NewEncoder(w *bytes.Buffer) *Encoder {
 }
 
 // writeIntField writes smpp integer
-func (e *Encoder) writeInt(v *int, b *bytes.Buffer) error {
+func (e *Encoder) writeInt(v *uint32, b *bytes.Buffer) error {
 	p := make([]byte, 4)
-	p[0] = byte(*v >> 24)
-	p[1] = byte(*v >> 16)
-	p[2] = byte(*v >> 8)
-	p[3] = byte(*v)
+	binary.BigEndian.PutUint32(p, *v)
 	n, err := b.Write(p)
+	if err != nil {
+		return err
+	}
 	if n < len(p) {
 		return io.EOF
 	}
-	return err
+	return nil
 }
 
 // writeString writes smpp octet string
@@ -49,7 +50,7 @@ func (e *Encoder) writeString(v *string, b *bytes.Buffer) error {
 
 // writeString writes smpp pdu header
 func (e *Encoder) writeHeader(header *Header) error {
-	header.CommandLength = e.b.Len() + PduHeaderLength
+	header.CommandLength = uint32(e.b.Len()) + PduHeaderLength
 	if err := e.writeInt(&header.CommandLength, e.h); err != nil {
 		return err
 	}

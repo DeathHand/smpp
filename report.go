@@ -33,14 +33,14 @@ type DeliveryReportParser struct {
 // NewDeliveryReportParser parser constructor
 func NewDeliveryReportParser() *DeliveryReportParser {
 	p := new(DeliveryReportParser)
-	p.idRegex, _ = regexp.Compile("id:(\\w+)")
-	p.subRegexp, _ = regexp.Compile("sub:(\\w+)")
-	p.dlvrdRegexp, _ = regexp.Compile("dlvrd:(\\w+)")
-	p.submitDateRegexp, _ = regexp.Compile("submit date:(\\w+)")
-	p.doneDateRegexp, _ = regexp.Compile("done date:(\\w+)")
-	p.statRegexp, _ = regexp.Compile("stat:(\\w+)")
-	p.errRegexp, _ = regexp.Compile("err:(\\w+)")
-	p.textRegexp, _ = regexp.Compile("Text:(.+)")
+	p.idRegex = regexp.MustCompile("id:(\\w+)")
+	p.subRegexp = regexp.MustCompile("sub:(\\w+)")
+	p.dlvrdRegexp = regexp.MustCompile("dlvrd:(\\w+)")
+	p.submitDateRegexp = regexp.MustCompile("submit date:(\\w+)")
+	p.doneDateRegexp = regexp.MustCompile("done date:(\\w+)")
+	p.statRegexp = regexp.MustCompile("stat:(\\w+)")
+	p.errRegexp = regexp.MustCompile("err:(\\w+)")
+	p.textRegexp = regexp.MustCompile("Text:(.+)")
 	return p
 }
 

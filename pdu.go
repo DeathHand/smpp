@@ -1,15 +1,15 @@
 package smpp
 
 type Header struct {
-	CommandLength  int
-	CommandID      int
-	CommandStatus  int
-	SequenceNumber int
+	CommandLength  uint32
+	CommandID      uint32
+	CommandStatus  uint32
+	SequenceNumber uint32
 }
 
 type Tlv struct {
-	Tag    int
-	Length int
+	Tag    uint32
+	Length uint32
 	Value  string
 }
 
@@ -19,9 +19,9 @@ type BindBody struct {
 	SystemID         string
 	Password         string
 	SystemType       string
-	InterfaceVersion int
-	AddrTon          int
-	AddrNpi          int
+	InterfaceVersion uint32
+	AddrTon          uint32
+	AddrNpi          uint32
 	AddressRange     string
 }
 
@@ -36,22 +36,22 @@ type BindRespBody struct {
 
 type SmBody struct {
 	ServiceType          string
-	SourceAddrTon        int
-	SourceAddrNpi        int
+	SourceAddrTon        uint32
+	SourceAddrNpi        uint32
 	SourceAddr           string
-	DestAddrTon          int
-	DestAddrNpi          int
+	DestAddrTon          uint32
+	DestAddrNpi          uint32
 	DestinationAddr      string
-	EsmClass             int
-	ProtocolID           int
-	PriorityFlag         int
+	EsmClass             uint32
+	ProtocolID           uint32
+	PriorityFlag         uint32
 	ScheduleDeliveryTime string
 	ValidityPeriod       string
-	RegisteredDelivery   int
-	ReplaceIfPresentFlag int
-	DataCoding           int
-	SmDefaultMessageID   int
-	SmLength             int
+	RegisteredDelivery   uint32
+	ReplaceIfPresentFlag uint32
+	DataCoding           uint32
+	SmDefaultMessageID   uint32
+	SmLength             uint32
 	ShortMessage         string
 }
 
